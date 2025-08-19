@@ -15,7 +15,7 @@ export default function SignUpPage() {
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <Briefcase className="h-6 w-6 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-bold text-foreground">JobTrack</span>
+            <span className="text-2xl font-bold text-foreground">ApplyList</span>
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-2">Create your account</h1>
           <p className="text-muted-foreground">Start tracking your job applications today</p>

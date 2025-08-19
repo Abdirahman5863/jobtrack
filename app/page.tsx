@@ -18,7 +18,7 @@ export default function LandingPage() {
               <div className="w-8 h-8 bg-orange-300/50 rounded-lg flex items-center justify-center">
                 <Briefcase className="h-5 w-5 text-orange-600" />
               </div>
-              <span className="text-xl font-bold text-foreground">JobTrack</span>
+              <span className="text-xl font-bold text-foreground">ApplyList</span>
             </div>
             <div className="flex items-center gap-4">
               <SignedOut>
@@ -139,7 +139,7 @@ export default function LandingPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why choose JobTrack?</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Why choose ApplyList?</h2>
             <p className="text-lg text-muted-foreground">We believe job tracking should be simple, not overwhelming.</p>
           </div>
 
@@ -167,7 +167,7 @@ export default function LandingPage() {
                   <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                     <CheckCircle className="h-5 w-5 text-primary-foreground" />
                   </div>
-                  <h3 className="text-lg font-semibold text-primary">JobTrack</h3>
+                  <h3 className="text-lg font-semibold text-primary">ApplyList</h3>
                 </div>
                 <ul className="space-y-2 text-foreground">
                   <li>• Clean, intuitive interface</li>
@@ -230,7 +230,7 @@ export default function LandingPage() {
               <div className="w-6 h-6 bg-orange-300/50 rounded flex items-center justify-center">
                 <Briefcase className="h-4 w-4 text-orange-600" />
               </div>
-              <span className="text-lg font-semibold text-foreground">JobTrack</span>
+              <span className="text-lg font-semibold text-foreground">ApplyList</span>
             </div>
             <div className="flex gap-6 text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">
@@ -245,7 +245,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © 2024 JobTrack. All rights reserved.
+            © 2024 ApplyList. All rights reserved.
           </div>
         </div>
       </footer>

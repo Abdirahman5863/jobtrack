@@ -11,7 +11,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "JobTrack - Stay Organized, Land Your Dream Job",
+  title: "ApplyList - Stay Organized, Land Your Dream Job",
   description:
     "Simple, modern job application tracker. Track applications, manage your job search, and land your dream job with ease.",
   generator: "v0.app",

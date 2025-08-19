@@ -83,7 +83,7 @@ export default function DemoPage() {
               <div className="w-8 h-8 bg-orange-300/50 rounded-lg flex items-center justify-center">
                 <Briefcase className="h-5 w-5 text-orange-600" />
               </div>
-              <span className="text-xl font-bold text-foreground">JobTrack</span>
+              <span className="text-xl font-bold text-foreground">ApplyList</span>
               <Badge variant="secondary" className="ml-2 bg-orange-100 text-orange-700">
                 Demo
               </Badge>
@@ -106,7 +106,7 @@ export default function DemoPage() {
       <div className="max-w-6xl mx-auto p-4 md:p-6">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">Demo Dashboard</h1>
-          <p className="text-muted-foreground">See how JobTrack helps you organize your job applications</p>
+          <p className="text-muted-foreground">See how ApplyList helps you organize your job applications</p>
         </div>
 
         {/* Stats Cards */}
@@ -202,7 +202,7 @@ export default function DemoPage() {
             <div className="text-center">
               <h3 className="text-lg font-semibold text-orange-900 mb-2">This is a Demo</h3>
               <p className="text-orange-700 mb-4">
-                This shows how JobTrack looks and feels. Create your account to start tracking your own job applications!
+                This shows how ApplyList looks and feels. Create your account to start tracking your own job applications!
               </p>
               <Button asChild>
                 <Link href="/sign-up">

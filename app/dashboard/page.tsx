@@ -5,6 +5,9 @@ import { JobTracker } from "@/components/job-tracker"
 import { syncClerkUserToSupabase } from "@/lib/supabase/clerk-sync"
 import { getUserSubscription, getJobCount } from "@/lib/subscription"
 import { Subscription } from "@/lib/subscription-types"
+import { SignedIn, UserButton } from "@clerk/nextjs"
+import { Briefcase } from "lucide-react"
+import Link from "next/link"
 export default async function Dashboard() {
   const authResult = await auth()
   const { userId } = authResult
@@ -46,28 +49,22 @@ export default async function Dashboard() {
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <svg className="h-5 w-5 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m-8 0V6a2 2 0 00-2 2v6"
-                  />
-                </svg>
+          <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-orange-300/50 rounded-lg flex items-center justify-center">
+                <Briefcase className="h-5 w-5 text-orange-600" />
               </div>
-              <span className="text-xl font-bold text-foreground">JobTrack</span>
-            </div>
+              <span className="text-xl font-bold text-foreground">ApplyList</span>
+            </Link>
             <div className="flex items-center gap-4">
               <div className="hidden sm:block text-sm text-muted-foreground">
                 Welcome back, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
-                  <span className="text-sm font-medium">
-                    {user?.firstName?.[0] || user?.emailAddresses[0]?.emailAddress[0]?.toUpperCase()}
-                  </span>
+                <SignedIn>
+               
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
                 </div>
               </div>
             </div>

@@ -16,7 +16,7 @@ export default function PricingPage() {
               <div className="w-8 h-8 bg-orange-300/50 rounded-lg flex items-center justify-center">
                 <Crown className="h-5 w-5 text-orange-600" />
               </div>
-              <span className="text-xl font-bold text-foreground">JobTrack</span>
+              <span className="text-xl font-bold text-foreground">ApplyList</span>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" asChild>
@@ -158,7 +158,7 @@ export default function PricingPage() {
             <CardContent className="pt-6">
               <h3 className="text-2xl font-bold mb-4">Ready to get organized?</h3>
               <p className="text-muted-foreground mb-6">
-                Join thousands of job seekers who've simplified their application tracking with JobTrack.
+                Join thousands of job seekers who've simplified their application tracking with ApplyList.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
