@@ -5,9 +5,14 @@ import Link from "next/link"
 export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6">
+      <div className="w-full max-w-md flex flex-col items-center space-y-8">
+        
+        {/* Back button + Logo */}
+        <div className="text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"
+          >
             <ArrowLeft className="h-4 w-4" />
             Back to home
           </Link>
@@ -17,26 +22,38 @@ export default function SignUpPage() {
             </div>
             <span className="text-2xl font-bold text-foreground">ApplyList</span>
           </div>
-          <h1 className="text-2xl font-bold text-foreground mb-2">Create your account</h1>
-          <p className="text-muted-foreground">Start tracking your job applications today</p>
+          <h1 className="text-3xl font-bold text-foreground">Create an account</h1>
+          <p className="mt-2 text-lg text-muted-foreground">
+            Sign up to start tracking your job applications
+          </p>
         </div>
 
-        <div className="flex justify-center">
-          <SignUp
-            appearance={{
-              elements: {
-                formButtonPrimary: "bg-primary hover:bg-primary/90 text-primary-foreground",
-                card: "shadow-none border border-border",
-                headerTitle: "text-foreground",
-                headerSubtitle: "text-muted-foreground",
-                socialButtonsBlockButton: "border-border text-foreground hover:bg-muted",
-                formFieldInput: "border-border bg-input",
-                footerActionLink: "text-primary hover:text-primary/90",
-              },
-            }}
-            redirectUrl="/dashboard"
-          />
-        </div>
+        {/* Clerk Signup */}
+        <SignUp
+          appearance={{
+            elements: {
+              card: "bg-card border border-border shadow-lg rounded-xl p-6",
+              headerTitle: "hidden",
+              headerSubtitle: "text-muted-foreground",
+              socialButtonsBlockButton__google: "bg-white hover:bg-white/60",
+              dividerText: "text-muted-foreground",
+              dividerLine: "bg-border",
+              formFieldLabel: "text-foreground",
+              formButtonPrimary: "bg-primary hover:bg-primary/90 text-primary-foreground",
+              formFieldInput: "border-border bg-input",
+              footer: "hidden",
+            },
+          }}
+          redirectUrl="/dashboard"
+        />
+
+        {/* Already have an account link */}
+        <p className="text-lg text-muted-foreground">
+          Already have an account?{" "}
+          <Link href="/sign-in" className="underline hover:text-foreground">
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   )
