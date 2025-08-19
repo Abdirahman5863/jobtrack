@@ -92,7 +92,13 @@ export default function RootLayout({
   }
 
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={publishableKey}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      afterSignInUrl="/dashboard"
+      afterSignUpUrl="/dashboard"
+    >
       <html lang="en" className={`${dmSans.variable} antialiased`}>
         <body className="font-sans">{children}</body>
       </html>
