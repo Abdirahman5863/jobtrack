@@ -75,8 +75,9 @@ export default function LandingPage() {
               variant="outline"
               size="lg"
               className="text-lg px-8 py-6 bg-transparent border-orange-300/50 text-orange-600 hover:bg-orange-50/50"
+              asChild
             >
-              View Demo
+              <Link href="/demo">View Demo</Link>
             </Button>
           </div>
         </div>
@@ -213,8 +214,9 @@ export default function LandingPage() {
               size="lg"
               variant="outline"
               className="text-lg px-8 py-6 border-white/50 text-white hover:bg-white/10 bg-transparent"
+              asChild
             >
-              View Pricing
+              <Link href="/pricing">View Pricing</Link>
             </Button>
           </div>
         </div>

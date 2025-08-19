@@ -12,6 +12,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, ExternalLink, Briefcase, Building2, MoreHorizontal, Edit, Trash2, Loader2 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { createJobAction, updateJobAction, deleteJobAction, updateJobStatusAction } from "@/lib/actions"
+import { SubscriptionBanner } from "./subscription-banner"
+import { Subscription } from "@/lib/subscription-types"
 
 export type JobStatus = "APPLIED" | "INTERVIEW" | "OFFER" | "REJECTED" | "WITHDRAWN"
 
@@ -39,6 +41,9 @@ interface JobTrackerProps {
     rejected: number
     withdrawn: number
   }
+  subscription?: Subscription | null
+  jobCount?: number
+  isAtLimit?: boolean
 }
 
 const statusColors = {
@@ -57,7 +62,7 @@ const statusLabels = {
   WITHDRAWN: "Withdrawn",
 }
 
-export function JobTracker({ initialJobs, initialStats }: JobTrackerProps) {
+export function JobTracker({ initialJobs, initialStats, subscription, jobCount = 0, isAtLimit = false }: JobTrackerProps) {
   const normalizeJob = (job: any): Job => {
     const toDate = (v: any) => {
       const d = new Date(v)
@@ -77,6 +82,7 @@ export function JobTracker({ initialJobs, initialStats }: JobTrackerProps) {
   const [editingStatus, setEditingStatus] = useState<string | null>(null)
   const [editingJob, setEditingJob] = useState<Job | null>(null)
   const [isPending, startTransition] = useTransition()
+  const [isUpgrading, setIsUpgrading] = useState(false)
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -133,6 +139,9 @@ export function JobTracker({ initialJobs, initialStats }: JobTrackerProps) {
         setEditingJob(null)
         resetForm()
         await refreshData()
+      } else if (result.error?.includes("subscription")) {
+        // Show subscription banner if limit reached
+        window.location.reload()
       }
     })
   }
@@ -176,6 +185,31 @@ export function JobTracker({ initialJobs, initialStats }: JobTrackerProps) {
     window.location.reload()
   }
 
+  const handleUpgrade = async () => {
+    setIsUpgrading(true)
+    try {
+      const response = await fetch("/api/subscription/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ planId: "pro" }),
+      })
+
+      const data = await response.json()
+      if (data.success && data.checkoutUrl) {
+        window.location.href = data.checkoutUrl
+      } else {
+        throw new Error(data.error || "Failed to create checkout session")
+      }
+    } catch (error) {
+      console.error("Error initiating upgrade:", error)
+      alert("Failed to initiate upgrade. Please try again.")
+    } finally {
+      setIsUpgrading(false)
+    }
+  }
+
   return (
     <>
       {/* Stats Cards */}
@@ -206,11 +240,27 @@ export function JobTracker({ initialJobs, initialStats }: JobTrackerProps) {
         </Card>
       </div>
 
+      {/* Subscription Banner */}
+      {isAtLimit && (
+        <div className="mb-8">
+          <SubscriptionBanner 
+            jobCount={jobCount} 
+            onUpgrade={handleUpgrade} 
+            isUpgrading={isUpgrading}
+          />
+        </div>
+      )}
+
       {/* Add Application Button */}
       <div className="flex justify-center mb-8">
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={resetForm} size="lg" className="gap-2" disabled={isPending}>
+            <Button 
+              onClick={resetForm} 
+              size="lg" 
+              className="gap-2" 
+              disabled={isPending || isAtLimit}
+            >
               <Plus className="h-5 w-5" />
               Add New Application
             </Button>

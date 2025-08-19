@@ -24,11 +24,19 @@ function mapUiToDbStatus(input: unknown): JobStatus {
       return "Applied"
   }
 }
+import { canCreateJob } from "./subscription"
+
 export async function createJobAction(formData: FormData) {
   const { userId } = await auth()
 
   if (!userId) {
     redirect("/sign-in")
+  }
+
+  // Check subscription limits
+  const { canCreate, reason } = await canCreateJob(userId)
+  if (!canCreate) {
+    return { error: reason || "Subscription limit reached" }
   }
 
   try {

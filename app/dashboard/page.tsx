@@ -3,6 +3,8 @@ import { redirect } from "next/navigation"
 import { getJobsByUserId, getJobStats, Job } from "@/lib/jobs"
 import { JobTracker } from "@/components/job-tracker"
 import { syncClerkUserToSupabase } from "@/lib/supabase/clerk-sync"
+import { getUserSubscription, getJobCount } from "@/lib/subscription"
+import { Subscription } from "@/lib/subscription-types"
 export default async function Dashboard() {
   const authResult = await auth()
   const { userId } = authResult
@@ -14,7 +16,12 @@ export default async function Dashboard() {
 
   await syncClerkUserToSupabase()
 
-  const [dbJobs, stats] = await Promise.all([getJobsByUserId(userId), getJobStats(userId)])
+  const [dbJobs, stats, subscription, jobCount] = await Promise.all([
+    getJobsByUserId(userId), 
+    getJobStats(userId),
+    getUserSubscription(userId),
+    getJobCount(userId)
+  ])
 
   const jobs = (dbJobs || []).map((j: any) => ({
     id: j.id,
@@ -29,6 +36,9 @@ export default async function Dashboard() {
     createdAt: new Date(j.created_at),
     updatedAt: new Date(j.updated_at),
   }))
+
+  const showSubscriptionBanner = !subscription || subscription.status === "free"
+  const isAtLimit = jobCount >= 5 && showSubscriptionBanner
 
   return (
     <div className="min-h-screen bg-background">
@@ -73,7 +83,13 @@ export default async function Dashboard() {
           <p className="text-muted-foreground">Track and manage your job applications</p>
         </div>
 
-        <JobTracker initialJobs={jobs as any[]} initialStats={stats} />
+        <JobTracker 
+          initialJobs={jobs as any[]} 
+          initialStats={stats} 
+          subscription={subscription}
+          jobCount={jobCount}
+          isAtLimit={isAtLimit}
+        />
       </div>
     </div>
   )
