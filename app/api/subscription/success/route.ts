@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import { verifyPayment, updateUserSubscription } from "@/lib/subscription"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
+    const searchParams = request.nextUrl.searchParams
     const reference = searchParams.get("reference")
     const trxref = searchParams.get("trxref")
 
@@ -31,11 +33,15 @@ export async function GET(request: NextRequest) {
     await updateUserSubscription(userId, planId, paymentData.data)
 
     // Redirect to dashboard with success message
-    const redirectUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?subscription=success`
+    const origin = process.env.NEXT_PUBLIC_APP_URL || request.nextUrl.origin
+    const redirectUrl = new URL("/dashboard", origin)
+    redirectUrl.searchParams.set("subscription", "success")
     return NextResponse.redirect(redirectUrl)
   } catch (error) {
     console.error("Error processing payment success:", error)
-    const redirectUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?subscription=error`
+    const origin = process.env.NEXT_PUBLIC_APP_URL || request.nextUrl.origin
+    const redirectUrl = new URL("/dashboard", origin)
+    redirectUrl.searchParams.set("subscription", "error")
     return NextResponse.redirect(redirectUrl)
   }
 }
