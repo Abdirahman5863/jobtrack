@@ -433,27 +433,32 @@ export function JobTracker({ initialJobs, initialStats, subscription, jobCount =
                         </a>
                       </Button>
                     )}
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className={isPending ? "opacity-50 pointer-events-none" : ""}
+    >
+      <MoreHorizontal className="h-4 w-4" />
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuItem onClick={() => handleEditJob(job)}>
+      <Edit className="h-4 w-4 mr-2" />
+      Edit
+    </DropdownMenuItem>
+    <DropdownMenuItem
+      onClick={() => handleDeleteJob(job.id)}
+      className="text-red-600 focus:text-red-600"
+    >
+      <Trash2 className="h-4 w-4 mr-2" />
+      Delete
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
 
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" disabled={isPending}>
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => handleEditJob(job)}>
-                          <Edit className="h-4 w-4 mr-2" />
-                          Edit
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => handleDeleteJob(job.id)}
-                          className="text-red-600 focus:text-red-600"
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
                   </div>
                 </div>
               </CardContent>
