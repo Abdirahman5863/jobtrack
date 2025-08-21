@@ -80,8 +80,28 @@ export default function LandingPage() {
               <Link href="/demo">View Demo</Link>
             </Button>
           </div>
+          
+    {/* Product Hunt Badge */}
+    <div className="flex justify-center pt-8">
+      <a
+        href="https://www.producthunt.com/products/applylist?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-applylist"
+        target="_blank"
+      >
+        <img
+          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1007691&theme=light&t=1755778874243"
+          alt="ApplyList - Stay organized, land your dream job | Product Hunt"
+          
+          width="250"
+          height="54"
+        />
+      </a>
+    </div>
         </div>
+        
+        
+  
       </section>
+      
 
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
