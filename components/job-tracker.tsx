@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog"
 import { Plus, ExternalLink, Briefcase, Building2, MoreHorizontal, Edit, Trash2, Loader2 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { createJobAction, updateJobAction, deleteJobAction, updateJobStatusAction } from "@/lib/actions"
@@ -140,7 +140,6 @@ export function JobTracker({ initialJobs, initialStats, subscription, jobCount =
         resetForm()
         await refreshData()
       } else if (result.error?.includes("subscription")) {
-        // Show subscription banner if limit reached
         window.location.reload()
       }
     })
@@ -180,8 +179,6 @@ export function JobTracker({ initialJobs, initialStats, subscription, jobCount =
   }
 
   const refreshData = async () => {
-    // In a real app, you'd refetch the data here
-    // For now, we'll just reload to get fresh data
     window.location.reload()
   }
 
@@ -433,31 +430,29 @@ export function JobTracker({ initialJobs, initialStats, subscription, jobCount =
                         </a>
                       </Button>
                     )}
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button
-      type="button"
-      variant="ghost"
-      size="sm"
-      className={isPending ? "opacity-50 pointer-events-none" : ""}
-    >
-      <MoreHorizontal className="h-4 w-4" />
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent align="end">
-    <DropdownMenuItem onClick={() => handleEditJob(job)}>
-      <Edit className="h-4 w-4 mr-2" />
-      Edit
-    </DropdownMenuItem>
-    <DropdownMenuItem
-      onClick={() => handleDeleteJob(job.id)}
-      className="text-red-600 focus:text-red-600"
-    >
-      <Trash2 className="h-4 w-4 mr-2" />
-      Delete
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
+ 
+
+  {/* Edit Button */}
+  <Button
+    type="button"
+    variant="ghost"
+    size="sm"
+    onClick={() => handleEditJob(job)}
+  >
+    <Edit className="h-4 w-4" />
+  </Button>
+
+  {/* Delete Button */}
+  <Button
+    type="button"
+    variant="ghost"
+    size="sm"
+    onClick={() => handleDeleteJob(job.id)}
+  >
+    <Trash2 className="h-4 w-4 text-red-600" />
+  </Button>
+
+
 
                   </div>
                 </div>
