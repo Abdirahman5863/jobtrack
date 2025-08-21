@@ -245,7 +245,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © 2024 ApplyList. All rights reserved.
+            © 2025 ApplyList. All rights reserved.
           </div>
         </div>
       </footer>
