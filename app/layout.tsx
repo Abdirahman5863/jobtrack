@@ -45,6 +45,7 @@ export const metadata: Metadata = {
   },
 }
 
+
 export default function RootLayout({
   children,
 }: {
@@ -60,6 +61,7 @@ export default function RootLayout({
     <ClerkProvider publishableKey={publishableKey}>
       <html lang="en" className={`${dmSans.variable} antialiased`} suppressHydrationWarning>
         <head>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="2e74a30c-c449-47e4-95d2-8f149861c063"></script>
           <link rel="icon" href="/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </head>
